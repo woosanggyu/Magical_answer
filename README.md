@@ -1,2 +1,2 @@
 # Magical_answer
-Recommends things for couple and friends to do together
+An application that recommends things for couple and friends to do together
