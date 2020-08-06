@@ -14,3 +14,8 @@ data class Doitclass(
     var title : String,
     var address : String
 )
+
+data class Enjoyclass(
+    var title : String,
+    var address : String
+)

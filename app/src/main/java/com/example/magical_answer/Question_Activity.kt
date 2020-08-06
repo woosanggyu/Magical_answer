@@ -13,10 +13,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
-import com.example.magical_answer.`interface`.ApiService
-import com.example.magical_answer.`interface`.ApiGetclass
-import com.example.magical_answer.`interface`.Doitclass
-import com.example.magical_answer.`interface`.Eatgetclass
+import com.example.magical_answer.`interface`.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -78,12 +75,13 @@ class Question_Activity : AppCompatActivity() {
             }
         }
 
+        //eat_btn 클릭시 이벤트
         eat_btn.setOnClickListener {
             //위치 권한 체크
             if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
                 //서비스 실행
-                updateLocation()
+                updateLocation() // 실시간 위치 업데이트
 
                 println("주소 : " + areafather + areaname)
                 apiconnect.requesteatData(areafather,areaname).enqueue(object : Callback<Eatgetclass> {
@@ -112,13 +110,14 @@ class Question_Activity : AppCompatActivity() {
             }
         }
 
-        Date_btn.setOnClickListener {
+        //show_btn 클릭시 이벤트
+        show_btn.setOnClickListener {
             //위치 권한 체크
             if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
                 //서비스 실행
 
-                updateLocation()
+                updateLocation() // 실시간 위치 업데이트
 
                 println("주소 : " + areafather + areaname)
                 apiconnect.requestdoitData(areafather,areaname).enqueue(object : Callback<Doitclass> {
@@ -132,6 +131,42 @@ class Question_Activity : AppCompatActivity() {
                     }
 
                     override fun onResponse(call: Call<Doitclass>, response: Response<Doitclass>) {
+                        //웹 통신에 성공 했을 때 실행되는 코드
+                        val doitdata = response.body()
+                        val dialog = AlertDialog.Builder(this@Question_Activity)
+                        dialog.setTitle("뚱이의 답변")
+                        dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n" + "주소는 " + doitdata?.address + " 여기야!" )
+                        dialog.show()
+                    }
+                })
+            } else {
+
+                //위치 권한 없으면 받아오기
+                getLocation()
+            }
+        }
+
+        //show_btn 클릭시 이벤트
+        enjoy_btn.setOnClickListener {
+            //위치 권한 체크
+            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                //서비스 실행
+
+                updateLocation() // 실시간 위치 업데이트
+
+                println("주소 : " + areafather + areaname)
+                apiconnect.requestenjoyData(areafather,areaname).enqueue(object : Callback<Enjoyclass> {
+                    override fun onFailure(call: Call<Enjoyclass>, t: Throwable) {
+                        t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
+                        // 웹 통신에 실패 했을 때 실행되는 코드
+                        val dialog = AlertDialog.Builder(this@Question_Activity)
+                        dialog.setTitle("실패")
+                        dialog.setMessage("통신에 실패했습니다.")
+                        dialog.show()
+                    }
+
+                    override fun onResponse(call: Call<Enjoyclass>, response: Response<Enjoyclass>) {
                         //웹 통신에 성공 했을 때 실행되는 코드
                         val doitdata = response.body()
                         val dialog = AlertDialog.Builder(this@Question_Activity)

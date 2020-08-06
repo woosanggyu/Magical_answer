@@ -8,33 +8,40 @@
     tools:context=".Question_Activity">
 
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="60dp">
+
         <TextView
             android:id="@+id/Maintext"
-            android:text="뚱이에게 물어보세요"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:textColor="#FA916C"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="70dp"
+            android:fontFamily="@font/autour_one"
+            android:gravity="center"
+            android:text="뚱이에게 물어보세요"
+            android:textColor="#FA916C"
+            android:textSize="30sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:id="@+id/gif_layout"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="280dp">
 
         <ImageView
             android:id="@+id/gif"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="30dp" />
+            android:paddingTop="10dp" />
 
     </LinearLayout>
 
     <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/back"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -42,37 +49,40 @@
             android:id="@+id/nobase_btn"
             android:text="심심해"
             android:layout_alignParentLeft="true"
-            android:layout_width="100dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="63dp"
+            android:layout_width="90dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/question_button_custom"
             android:layout_height="50dp"/>
 
         <Button
-            android:id="@+id/Date_btn"
-            android:layout_width="100dp"
+            android:id="@+id/show_btn"
+            android:layout_width="90dp"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="63dp"
-            android:layout_below="@id/nobase_btn"
-            android:text="데이트 코스" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/nobase_btn"
+            android:background="@drawable/question_button_custom"
+            android:text="구경할래" />
 
         <Button
-            android:id="@+id/Think_btn"
-            android:text="고민 들어줘"
+            android:id="@+id/enjoy_btn"
+            android:text="체험할래"
             android:layout_alignParentRight="true"
-            android:layout_width="100dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="63dp"
+            android:layout_width="90dp"
+            android:background="@drawable/question_button_custom"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:layout_height="50dp"/>
 
         <Button
             android:id="@+id/eat_btn"
-            android:text="밥 추천해줘"
-            android:layout_width="100dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/Think_btn"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="63dp"
+            android:text="배고파"
+            android:layout_width="90dp"
+            android:layout_toLeftOf="@+id/enjoy_btn"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/question_button_custom"
             android:layout_height="50dp"/>
 
     </RelativeLayout>

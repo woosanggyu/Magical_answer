@@ -26,4 +26,11 @@ interface ApiService {
         @Field("areafather") areafather:String,
         @Field("areaname") areaname : String
     ) : Call<Doitclass>
+
+    @FormUrlEncoded
+    @POST("/api/requestdata/enjoydata")
+    fun requestenjoyData(
+        @Field("areafather") areafather:String,
+        @Field("areaname") areaname : String
+    ) : Call<Enjoyclass>
 }
