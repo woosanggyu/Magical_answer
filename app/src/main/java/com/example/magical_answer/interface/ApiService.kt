@@ -2,7 +2,6 @@ package com.example.magical_answer.`interface`
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -12,5 +11,19 @@ interface ApiService {
     fun requestData(
         //input data
         @Field("no") no:Int
-    ) : Call<nobase> // output data
+    ) : Call<ApiGetclass> // output data
+
+    @FormUrlEncoded
+    @POST("/api/requestdata/eatdata")
+    fun requesteatData(
+        @Field("areafather") areafather:String,
+        @Field("areaname") areaname : String
+    ) : Call<Eatgetclass>
+
+    @FormUrlEncoded
+    @POST("/api/requestdata/doitdata")
+    fun requestdoitData(
+        @Field("areafather") areafather:String,
+        @Field("areaname") areaname : String
+    ) : Call<Doitclass>
 }

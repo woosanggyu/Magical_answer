@@ -14,7 +14,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
 import com.example.magical_answer.`interface`.ApiService
-import com.example.magical_answer.`interface`.nobase
+import com.example.magical_answer.`interface`.ApiGetclass
+import com.example.magical_answer.`interface`.Doitclass
+import com.example.magical_answer.`interface`.Eatgetclass
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -26,13 +28,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
-import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
 class Question_Activity : AppCompatActivity() {
 
     lateinit var mFusedLocationProviderClient : FusedLocationProviderClient
     val locationRequestId = 100
+    var areafather = ""
+    var areaname = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +49,12 @@ class Question_Activity : AppCompatActivity() {
         nobase_btn.setOnClickListener {
             //위치 권한 체크
             if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
                 //서비스 실행
                 val no = (1..6).random()
 
-                getnobase.requestData(no).enqueue(object : Callback<nobase> {
-                    override fun onFailure(call: Call<nobase>, t: Throwable) {
+                apiconnect.requestData(no).enqueue(object : Callback<ApiGetclass> {
+                    override fun onFailure(call: Call<ApiGetclass>, t: Throwable) {
                         t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
                         // 웹 통신에 실패 했을 때 실행되는 코드
                         val dialog = AlertDialog.Builder(this@Question_Activity)
@@ -59,7 +63,7 @@ class Question_Activity : AppCompatActivity() {
                         dialog.show()
                     }
 
-                    override fun onResponse(call: Call<nobase>, response: Response<nobase>) {
+                    override fun onResponse(call: Call<ApiGetclass>, response: Response<ApiGetclass>) {
                         //웹 통신에 성공 했을 때 실행되는 코드
                         val nonobase = response.body()
                         val dialog = AlertDialog.Builder(this@Question_Activity)
@@ -72,20 +76,86 @@ class Question_Activity : AppCompatActivity() {
                 //위치 권한 없으면 받아오기
                 getLocation()
             }
+        }
 
+        eat_btn.setOnClickListener {
+            //위치 권한 체크
+            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
+                //서비스 실행
+                updateLocation()
+
+                println("주소 : " + areafather + areaname)
+                apiconnect.requesteatData(areafather,areaname).enqueue(object : Callback<Eatgetclass> {
+                    override fun onFailure(call: Call<Eatgetclass>, t: Throwable) {
+                        t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
+                        // 웹 통신에 실패 했을 때 실행되는 코드
+                        val dialog = AlertDialog.Builder(this@Question_Activity)
+                        dialog.setTitle("실패")
+                        dialog.setMessage("통신에 실패했습니다.")
+                        dialog.show()
+                    }
+
+                    override fun onResponse(call: Call<Eatgetclass>, response: Response<Eatgetclass>) {
+                        //웹 통신에 성공 했을 때 실행되는 코드
+                        val eatdata = response.body()
+                        val dialog = AlertDialog.Builder(this@Question_Activity)
+                        dialog.setTitle("뚱이의 답변")
+                        dialog.setMessage(eatdata?.answer + "에 가보는건 어때?")
+                        dialog.show()
+                    }
+                })
+            } else {
+
+                //위치 권한 없으면 받아오기
+                getLocation()
+            }
+        }
+
+        Date_btn.setOnClickListener {
+            //위치 권한 체크
+            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                //서비스 실행
+
+                updateLocation()
+
+                println("주소 : " + areafather + areaname)
+                apiconnect.requestdoitData(areafather,areaname).enqueue(object : Callback<Doitclass> {
+                    override fun onFailure(call: Call<Doitclass>, t: Throwable) {
+                        t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
+                        // 웹 통신에 실패 했을 때 실행되는 코드
+                        val dialog = AlertDialog.Builder(this@Question_Activity)
+                        dialog.setTitle("실패")
+                        dialog.setMessage("통신에 실패했습니다.")
+                        dialog.show()
+                    }
+
+                    override fun onResponse(call: Call<Doitclass>, response: Response<Doitclass>) {
+                        //웹 통신에 성공 했을 때 실행되는 코드
+                        val doitdata = response.body()
+                        val dialog = AlertDialog.Builder(this@Question_Activity)
+                        dialog.setTitle("뚱이의 답변")
+                        dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n" + "주소는 " + doitdata?.address + " 여기야!" )
+                        dialog.show()
+                    }
+                })
+            } else {
+
+                //위치 권한 없으면 받아오기
+                getLocation()
+            }
         }
     }
 
     //레트로핏 객체 선언
     val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.0.42:3000")
+        .baseUrl("http://ec2-13-209-98-61.ap-northeast-2.compute.amazonaws.com:3000") //서버주소
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    //서비스 연결
-    val getnobase = retrofit.create(ApiService::class.java)
-
+   //서비스 연결
+    val apiconnect = retrofit.create(ApiService::class.java)
 
     fun checkForlocationPermission() : Boolean {
         // 위치 권한 받았는지 확인
@@ -151,6 +221,14 @@ class Question_Activity : AppCompatActivity() {
 
         addressList = geocoder.getFromLocation(location.latitude, location.longitude, 1) as ArrayList<Address>
 
-        println("주소: " + addressList.get(0).getAddressLine(0))
+        val userAdd = addressList.get(0).getAddressLine(0)
+        val addr = userAdd.split(" ")
+
+        areafather = addr[1]
+        areaname = addr[2]
+
+        return
+
+//        println("주소 : " + addr[1] +addr[2])
     }
 }
