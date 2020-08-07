@@ -44,11 +44,8 @@ class Question_Activity : AppCompatActivity() {
 
         //nobase_btn 클릭시 이벤트
         nobase_btn.setOnClickListener {
-            //위치 권한 체크
-            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
                 //서비스 실행
-                val no = (1..6).random()
+                val no = (1..11).random()
 
                 apiconnect.requestData(no).enqueue(object : Callback<ApiGetclass> {
                     override fun onFailure(call: Call<ApiGetclass>, t: Throwable) {
@@ -69,10 +66,6 @@ class Question_Activity : AppCompatActivity() {
                         dialog.show()
                     }
                 })
-            } else {
-                //위치 권한 없으면 받아오기
-                getLocation()
-            }
         }
 
         //eat_btn 클릭시 이벤트
@@ -84,6 +77,7 @@ class Question_Activity : AppCompatActivity() {
                 updateLocation() // 실시간 위치 업데이트
 
                 println("주소 : " + areafather + areaname)
+
                 apiconnect.requesteatData(areafather,areaname).enqueue(object : Callback<Eatgetclass> {
                     override fun onFailure(call: Call<Eatgetclass>, t: Throwable) {
                         t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
@@ -99,7 +93,7 @@ class Question_Activity : AppCompatActivity() {
                         val eatdata = response.body()
                         val dialog = AlertDialog.Builder(this@Question_Activity)
                         dialog.setTitle("뚱이의 답변")
-                        dialog.setMessage(eatdata?.answer + "에 가보는건 어때?")
+                        dialog.setMessage(eatdata?.title + "에 가보는건 어때?\n 주소는 " + eatdata?.address + "여기야!")
                         dialog.show()
                     }
                 })
@@ -135,7 +129,7 @@ class Question_Activity : AppCompatActivity() {
                         val doitdata = response.body()
                         val dialog = AlertDialog.Builder(this@Question_Activity)
                         dialog.setTitle("뚱이의 답변")
-                        dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n" + "주소는 " + doitdata?.address + " 여기야!" )
+                        dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n 주소는 " + doitdata?.address + " 여기야!" )
                         dialog.show()
                     }
                 })
@@ -171,7 +165,7 @@ class Question_Activity : AppCompatActivity() {
                         val doitdata = response.body()
                         val dialog = AlertDialog.Builder(this@Question_Activity)
                         dialog.setTitle("뚱이의 답변")
-                        dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n" + "주소는 " + doitdata?.address + " 여기야!" )
+                        dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n 주소는 " + doitdata?.address + " 여기야!" )
                         dialog.show()
                     }
                 })

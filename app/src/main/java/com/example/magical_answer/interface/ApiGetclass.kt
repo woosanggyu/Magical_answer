@@ -7,7 +7,8 @@ data class ApiGetclass(
 )
 
 data class Eatgetclass(
-    var answer : String
+    var title : String,
+    var address : String
 )
 
 data class Doitclass(
