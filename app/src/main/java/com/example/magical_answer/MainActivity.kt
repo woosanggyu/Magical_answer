@@ -21,5 +21,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, Memo_Activity::class.java)
             startActivity(intent)
         }
+
+        Login_btn.setOnClickListener {
+            val intent = Intent(this@MainActivity, Login_Activity::class.java)
+            startActivity(intent)
+        }
     }
 }

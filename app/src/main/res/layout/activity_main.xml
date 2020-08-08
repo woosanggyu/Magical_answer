@@ -27,7 +27,7 @@
         <Button
             android:text="Ask for Patrick Star"
             android:id="@+id/ask_patrick_btn"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:layout_width="200dp"
             android:textColor="#ffffff"
@@ -37,6 +37,16 @@
         <Button
             android:text="MEMO"
             android:id="@+id/memo_btn"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/main_button_custom"
+            android:layout_height="70dp"/>
+
+        <Button
+            android:text="Login"
+            android:id="@+id/Login_btn"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
             android:layout_width="200dp"

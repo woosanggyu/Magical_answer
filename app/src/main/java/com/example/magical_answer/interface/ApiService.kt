@@ -33,4 +33,11 @@ interface ApiService {
         @Field("areafather") areafather:String,
         @Field("areaname") areaname : String
     ) : Call<Enjoyclass>
+
+    @FormUrlEncoded
+    @POST("/api/user/signin")
+    fun requestLogin(
+        @Field("id") id:String,
+        @Field("password") password : String
+    ) : Call<Loginclass>
 }

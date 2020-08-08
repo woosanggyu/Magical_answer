@@ -20,3 +20,9 @@ data class Enjoyclass(
     var title : String,
     var address : String
 )
+
+data class Loginclass(
+    var message : String,
+    var Nickname : String,
+    var token : String
+)
