@@ -53,6 +53,7 @@
             android:layout_height="50dp"/>
         <EditText
             android:id="@+id/pw_text"
+            android:inputType="textPassword"
             android:layout_below="@+id/id_text"
             android:layout_toRightOf="@+id/idtext"
             android:layout_marginLeft="10dp"
