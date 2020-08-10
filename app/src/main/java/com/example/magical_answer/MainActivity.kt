@@ -20,7 +20,14 @@ class MainActivity : AppCompatActivity() {
 
         memo_btn.setOnClickListener {
             if(intent.hasExtra("token")){
+                var Token = intent.hasExtra("token")
+                var ID = intent.hasExtra("ID")
+                var Nickname = intent.hasExtra("Nickname")
+
                 val intent = Intent(this@MainActivity, Memo_Activity::class.java)
+                intent.putExtra("token",Token)
+                intent.putExtra("ID", ID)
+                intent.putExtra("Nickname", Nickname)
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "로그인되지 않았습니다.", Toast.LENGTH_SHORT).show()

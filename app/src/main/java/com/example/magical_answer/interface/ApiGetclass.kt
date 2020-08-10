@@ -23,6 +23,14 @@ data class Enjoyclass(
 
 data class Loginclass(
     var message : String,
+    var ID : String,
     var Nickname : String,
     var token : String
+)
+data class checkidclass(
+    var msg : String
+)
+
+data class Registclass(
+    var msg : String
 )

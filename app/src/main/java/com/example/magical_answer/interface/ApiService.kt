@@ -40,4 +40,20 @@ interface ApiService {
         @Field("id") id:String,
         @Field("password") password : String
     ) : Call<Loginclass>
+
+    @FormUrlEncoded
+    @POST("/api/user/checkid")
+    fun requestcheckid(
+        @Field("id") id:String
+    ) : Call<checkidclass>
+
+    @FormUrlEncoded
+    @POST("/api/user/signup")
+    fun requestregist(
+        @Field("id") id:String,
+        @Field("password") password:String,
+        @Field("nickname") nickname:String,
+        @Field("gender") gender:String,
+        @Field("age") age:String
+    ) : Call<Registclass>
 }
