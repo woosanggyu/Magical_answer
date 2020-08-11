@@ -173,6 +173,6 @@ class Login_Activity : AppCompatActivity() {
 
         alertDialog.setView(view)
         alertDialog.show()
-        alertDialog.window?.setLayout(1000,1200)
+        alertDialog.window?.setLayout(700,850)
         }
     }
