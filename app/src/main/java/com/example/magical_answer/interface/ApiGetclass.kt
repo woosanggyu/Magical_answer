@@ -31,6 +31,10 @@ data class checkidclass(
     var msg : String
 )
 
+data class checknickclass(
+    var msg : String
+)
+
 data class Registclass(
     var msg : String
 )

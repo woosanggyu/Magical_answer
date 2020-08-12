@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "로그인되지 않았습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+        
 
 
 
@@ -57,10 +58,10 @@ class MainActivity : AppCompatActivity() {
                 token = false
                 Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
 
-                val i = Intent(this@MainActivity, MainActivity::class.java)
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
                 finish()
                 overridePendingTransition(0, 0)
-                startActivity(i)
+                startActivity(intent)
                 overridePendingTransition(0, 0)
             } else {
                 val intent = Intent(this@MainActivity, Login_Activity::class.java)

@@ -48,6 +48,12 @@ interface ApiService {
     ) : Call<checkidclass>
 
     @FormUrlEncoded
+    @POST("/api/user/checknick")
+    fun requestchecknick(
+        @Field("nickname") nickname:String
+    ) : Call<checknickclass>
+
+    @FormUrlEncoded
     @POST("/api/user/signup")
     fun requestregist(
         @Field("id") id:String,

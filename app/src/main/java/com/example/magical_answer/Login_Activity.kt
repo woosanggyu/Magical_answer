@@ -25,6 +25,8 @@ class Login_Activity : AppCompatActivity() {
     var ID = ""
     var Nickname = ""
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_)
@@ -95,6 +97,10 @@ class Login_Activity : AppCompatActivity() {
     val apiconnect = retrofit.create(ApiService::class.java)
 
     private fun signup() {
+
+        var signup_id_flag = false
+        var signup_nickname_flag = false
+
         var inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.activity_signup__dialog, null)
 
@@ -104,6 +110,7 @@ class Login_Activity : AppCompatActivity() {
         val register = view.findViewById<Button>(R.id.register_btn)
         val cancel = view.findViewById<Button>(R.id.cancel_btn)
         val checkid = view.findViewById<Button>(R.id.check_id_btn)
+        val checknick = view.findViewById<Button>(R.id.check_nickname_btn)
 
         checkid.setOnClickListener {
 
@@ -117,11 +124,42 @@ class Login_Activity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<checkidclass>, response: Response<checkidclass>) {
                         val checkresult = response.body()
-                        Toast.makeText(applicationContext, checkresult?.msg, Toast.LENGTH_SHORT).show()
+                        if(checkresult?.msg == "사용중인 아이디 입니다.") {
+                            signup_id_flag = false
+                            Toast.makeText(applicationContext, checkresult?.msg, Toast.LENGTH_SHORT).show()
+                        } else if( checkresult?.msg == "사용가능한 아이디 입니다.") {
+                            signup_id_flag = true
+                            Toast.makeText(applicationContext, checkresult?.msg, Toast.LENGTH_SHORT).show()
+                        }
                     }
                 })
             } else {
                 Toast.makeText(applicationContext, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        checknick.setOnClickListener {
+            var nickname = alertDialog.usernick_text.text.toString()
+            if( nickname != "" ) {
+
+                apiconnect.requestchecknick(nickname).enqueue(object : Callback<checknickclass>{
+                    override fun onFailure(call: Call<checknickclass>, t: Throwable) {
+                        Toast.makeText(applicationContext, "서버 통신 오류", Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onResponse(call: Call<checknickclass>, response: Response<checknickclass>) {
+                        val checkresult = response.body()
+                        if(checkresult?.msg == "사용중인 닉네임 입니다.") {
+                            signup_nickname_flag = false
+                            Toast.makeText(applicationContext, checkresult?.msg, Toast.LENGTH_SHORT).show()
+                        } else if( checkresult?.msg == "사용가능한 닉네임 입니다.") {
+                            signup_nickname_flag = true
+                            Toast.makeText(applicationContext, checkresult?.msg, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
+            } else {
+                Toast.makeText(applicationContext, "닉네임을 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -132,7 +170,7 @@ class Login_Activity : AppCompatActivity() {
             var age = alertDialog.userage_text?.text.toString()
             var gender = alertDialog.radiogroup.checkedRadioButtonId
 
-            if( id != "" && pw != "" && nick != "" && age != "" && gender != -1) {
+            if( id != "" && pw != "" && nick != "" && age != "" && gender != -1 && signup_nickname_flag && signup_id_flag) {
                 var gender2 = resources.getResourceEntryName(gender)
 
                 apiconnect.requestregist(id, pw, nick, gender2, age).enqueue(object : Callback<Registclass>{
@@ -142,17 +180,11 @@ class Login_Activity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<Registclass>, response: Response<Registclass>) {
                         val result = response.body()
-                        println(result?.msg)
 
-                        if (result?.msg == "회원가입에 실패했습니다.") {
-                            Toast.makeText(applicationContext, "아이디 중복확인을 해주세요.", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(applicationContext, result?.msg, Toast.LENGTH_SHORT).show()
-                            alertDialog.dismiss()
-                        }
+                        Toast.makeText(applicationContext, result?.msg, Toast.LENGTH_SHORT).show()
+                        alertDialog.dismiss()
                     }
                 })
-
 
             } else if ( id == "") {
                 Toast.makeText(applicationContext, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -164,6 +196,10 @@ class Login_Activity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "나이를 입력해주세요", Toast.LENGTH_SHORT).show()
             } else if ( gender == -1) {
                 Toast.makeText(applicationContext, "성별을 체크해주세요", Toast.LENGTH_SHORT).show()
+            } else if ( signup_nickname_flag == false) {
+                Toast.makeText(applicationContext, "닉네임 중복확인 해주세요", Toast.LENGTH_SHORT).show()
+            } else if ( signup_id_flag == false) {
+                Toast.makeText(applicationContext, "아이디 중복확인 해주세요", Toast.LENGTH_SHORT).show()
             }
         }
 
