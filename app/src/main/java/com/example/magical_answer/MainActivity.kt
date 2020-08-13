@@ -35,14 +35,18 @@ class MainActivity : AppCompatActivity() {
             //만약 토큰이 있다면 ( 로그인 했을때만 발급 됌)
             if(token){
                 //토큰, 아이디, 닉네임
-                val Token = intent.hasExtra("token")
-                val ID = intent.hasExtra("ID")
-                val Nickname = intent.hasExtra("Nickname")
+                val usertoken = intent.getStringExtra("token")
+                val id = intent.getStringExtra("id")
+                val nickname = intent.getStringExtra("nickname")
+
+//                println("유저 토큰이다 : " + usertoken)
+//                println("유저 아이디다 : " + ID)
+//                println("유저 닉넴이다 : " + Nickname)
 
                 val intent = Intent(this@MainActivity, Memo_Activity::class.java)
-                intent.putExtra("token",Token)
-                intent.putExtra("ID", ID)
-                intent.putExtra("Nickname", Nickname)
+                intent.putExtra("usertoken",usertoken)
+                intent.putExtra("id", id)
+                intent.putExtra("nickname", nickname)
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "로그인되지 않았습니다.", Toast.LENGTH_SHORT).show()

@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Login_Activity : AppCompatActivity() {
 
-    var Token = ""
+    var usertoken = ""
     var ID = ""
     var Nickname = ""
 
@@ -50,20 +50,22 @@ class Login_Activity : AppCompatActivity() {
                     override fun onResponse(call: Call<Loginclass>, response: Response<Loginclass>) {
                         //웹 통신에 성공 했을 때 실행되는 코드
                         val logindata = response.body()
-                        Token = logindata!!.token
+                        usertoken = logindata!!.token
                         ID = logindata!!.ID
                         Nickname = logindata!!.Nickname
 
-                        if( Token != ""){
+//                        println("토큰이다: " + usertoken)
+
+                        if( usertoken != ""){
                             // 토큰이 존재할때 즉 로그인에 성공했을 때
                             Toast.makeText(this@Login_Activity,"로그인에 성공했습니다.",Toast.LENGTH_SHORT).show()
                             val loginintent = Intent(this@Login_Activity, MainActivity::class.java)
-                            loginintent.putExtra("token", Token)
-                            loginintent.putExtra("ID", ID)
-                            loginintent.putExtra("Nickname", Nickname)
+                            loginintent.putExtra("token", usertoken)
+                            loginintent.putExtra("id", ID)
+                            loginintent.putExtra("nickname", Nickname)
                             startActivity(loginintent)
 
-                        } else if ( Token == "") {
+                        } else if ( usertoken == "") {
                             // 토큰이 없다면 로그인에 실패함.
                             val dialog = AlertDialog.Builder(this@Login_Activity)
                             dialog.setTitle("로그인에 실패했습니다.")

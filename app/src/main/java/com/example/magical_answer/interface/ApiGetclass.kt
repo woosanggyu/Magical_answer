@@ -1,5 +1,10 @@
 package com.example.magical_answer.`interface`
 
+import android.widget.ListView
+import com.google.gson.JsonArray
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 data class ApiGetclass(
     // 받아올 데이터 선언
@@ -37,4 +42,8 @@ data class checknickclass(
 
 data class Registclass(
     var msg : String
+)
+
+data class Mymemolist(
+    val answer : JsonArray
 )

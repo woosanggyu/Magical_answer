@@ -1,8 +1,6 @@
 package com.example.magical_answer.`interface`
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -54,6 +52,7 @@ interface ApiService {
     ) : Call<checknickclass>
 
     @FormUrlEncoded
+
     @POST("/api/user/signup")
     fun requestregist(
         @Field("id") id:String,
@@ -62,4 +61,11 @@ interface ApiService {
         @Field("gender") gender:String,
         @Field("age") age:String
     ) : Call<Registclass>
+
+    @FormUrlEncoded
+    @POST("/api/requestdata/mymemo")
+    fun requestmymemo(
+        @Header("token") token : String,
+        @Field("nickname") nickname: String
+    ) : Call<Mymemolist>
 }
