@@ -6,76 +6,85 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="2.5"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        android:layout_weight="0.5">
 
         <TextView
+            android:id="@+id/item_no"
             android:textColor="#000000"
+            android:text="글번호"
             android:gravity="center"
-            android:id="@+id/item_title"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:text="Title"
-            android:textSize="50sp" />
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_weight="1.5">
+        android:layout_weight="3"
+        android:layout_height="100dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5">
+
+            <TextView
+                android:textColor="#000000"
+                android:gravity="center"
+                android:id="@+id/item_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="제목"
+                android:textSize="25sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5">
+
+            <TextView
+                android:textColor="#000000"
+                android:gravity="center"
+                android:id="@+id/item_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="날짜"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_weight="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <TextView
-                android:textColor="#000000"
-                android:id="@+id/item_date"
-                android:gravity="center"
-                android:text="Date"
-                android:textSize="20sp"
+            <Button
+                android:text="수정"
+                android:textColor="#14E61E"
+                android:background="@drawable/main_button_custom"
+                android:id="@+id/memo_update_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </LinearLayout>
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:text="수정"
-                    android:textColor="#14E61E"
-                    android:background="@drawable/main_button_custom"
-                    android:id="@+id/memo_update_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:text="삭제"
-                    android:textColor="#FF0000"
-                    android:background="@drawable/main_button_custom"
-                    android:id="@+id/memo_delete_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-            </LinearLayout>
-
+            <Button
+                android:text="삭제"
+                android:textColor="#E61414"
+                android:background="@drawable/main_button_custom"
+                android:id="@+id/memo_delete_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </LinearLayout>
 

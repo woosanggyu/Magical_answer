@@ -25,8 +25,6 @@ class Login_Activity : AppCompatActivity() {
     var ID = ""
     var Nickname = ""
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_)

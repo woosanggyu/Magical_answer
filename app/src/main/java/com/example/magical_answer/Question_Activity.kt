@@ -84,7 +84,7 @@ class Question_Activity : AppCompatActivity() {
                         // 웹 통신에 실패 했을 때 실행되는 코드
                         val dialog = AlertDialog.Builder(this@Question_Activity)
                         dialog.setTitle("실패")
-                        dialog.setMessage("통신에 실패했습니다.")
+                        dialog.setMessage("잠시후 다시 시도해주세요.")
                         dialog.show()
                     }
 
@@ -244,20 +244,24 @@ class Question_Activity : AppCompatActivity() {
 
     fun updateAddressUI(location : Location){
         var geocoder : Geocoder
-        var addressList = ArrayList<Address>()
+        var addressList: ArrayList<Address>
 
         geocoder = Geocoder(this, Locale.getDefault())
 
         addressList = geocoder.getFromLocation(location.latitude, location.longitude, 1) as ArrayList<Address>
 
-        val userAdd = addressList.get(0).getAddressLine(0)
-        val addr = userAdd.split(" ")
+//        println("주소 :" + addressList)
 
-        areafather = addr[1]
-        areaname = addr[2]
+        if(addressList.size != 0) {
+            val userAdd = addressList.get(0).getAddressLine(0)
+            val addr = userAdd.split(" ")
 
-        return
+            areafather = addr[1]
+            areaname = addr[2]
 
-//        println("주소 : " + addr[1] +addr[2])
+            println("주소 : " + addr[1] + " " +addr[2])
+        } else {
+            println("주소없졍 :" + addressList)
+        }
     }
 }
