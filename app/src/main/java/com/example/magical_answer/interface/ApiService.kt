@@ -68,4 +68,13 @@ interface ApiService {
         @Header("token") token : String,
         @Field("nickname") nickname: String
     ) : Call<Mymemolist>
+
+    @FormUrlEncoded
+    @POST("/api/requestdata/addmemo")
+    fun requestaddmemo(
+        @Header("token") token : String,
+        @Field("nickname") nickname: String,
+        @Field("title") title: String,
+        @Field("content") content: String
+    ) : Call<addmemo>
 }

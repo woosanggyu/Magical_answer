@@ -48,4 +48,14 @@ data class Mymemolist(
     val answer : JsonArray
 )
 
-data class mymemo(val no : String, val writer : String, val title : String, val content : String, val CreateTime : String)
+data class mymemo(
+    val no : String,
+    val writer : String,
+    val title : String,
+    val content : String,
+    val CreateTime : String
+)
+
+data class addmemo(
+    val answer : String
+)
