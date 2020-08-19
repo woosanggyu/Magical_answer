@@ -33,6 +33,9 @@ class Question_Activity : AppCompatActivity() {
     val locationRequestId = 100
     var areafather = ""
     var areaname = ""
+    var eat_flag = true
+    var show_flag = true
+    var enjoy_flag = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,109 +73,130 @@ class Question_Activity : AppCompatActivity() {
 
         //eat_btn 클릭시 이벤트
         eat_btn.setOnClickListener {
-            //위치 권한 체크
-            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if(eat_flag) {
+                //위치 권한 체크
+                if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    eat_flag = false
+                    //서비스 실행
+                    updateLocation() // 실시간 위치 업데이트
 
-                //서비스 실행
-                updateLocation() // 실시간 위치 업데이트
 
-                println("주소 : " + areafather + areaname)
+                    println("주소 : " + areafather + areaname)
 
-                apiconnect.requesteatData(areafather,areaname).enqueue(object : Callback<Eatgetclass> {
-                    override fun onFailure(call: Call<Eatgetclass>, t: Throwable) {
-                        t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
-                        // 웹 통신에 실패 했을 때 실행되는 코드
-                        val dialog = AlertDialog.Builder(this@Question_Activity)
-                        dialog.setTitle("실패")
-                        dialog.setMessage("잠시후 다시 시도해주세요.")
-                        dialog.show()
-                    }
+                    apiconnect.requesteatData(areafather,areaname).enqueue(object : Callback<Eatgetclass> {
+                        override fun onFailure(call: Call<Eatgetclass>, t: Throwable) {
+                            t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
+                            // 웹 통신에 실패 했을 때 실행되는 코드
+                            val dialog = AlertDialog.Builder(this@Question_Activity)
+                            dialog.setTitle("실패")
+                            dialog.setMessage("잠시후 다시 시도해주세요.")
+                            dialog.show()
+                            eat_flag = true
+                        }
 
-                    override fun onResponse(call: Call<Eatgetclass>, response: Response<Eatgetclass>) {
-                        //웹 통신에 성공 했을 때 실행되는 코드
-                        val eatdata = response.body()
-                        val dialog = AlertDialog.Builder(this@Question_Activity)
-                        dialog.setTitle("뚱이의 답변")
-                        dialog.setMessage(eatdata?.title + "에 가보는건 어때?\n 주소는 " + eatdata?.address + "여기야!")
-                        dialog.show()
-                    }
-                })
-            } else {
+                        override fun onResponse(call: Call<Eatgetclass>, response: Response<Eatgetclass>) {
+                            //웹 통신에 성공 했을 때 실행되는 코드
+                            val eatdata = response.body()
+                            val dialog = AlertDialog.Builder(this@Question_Activity)
+                            dialog.setTitle("뚱이의 답변")
+                            dialog.setMessage(eatdata?.title + "에 가보는건 어때?\n 주소는 " + eatdata?.address + "여기야!")
+                            dialog.show()
+                            eat_flag = true
+                        }
+                    })
 
-                //위치 권한 없으면 받아오기
-                getLocation()
+
+
+                } else {
+
+                    //위치 권한 없으면 받아오기
+                    getLocation()
+                }
             }
+
         }
 
         //show_btn 클릭시 이벤트
         show_btn.setOnClickListener {
-            //위치 권한 체크
-            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-                //서비스 실행
+            if(show_flag) {
+                //위치 권한 체크
+                if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    show_flag = false
+                    //서비스 실행
 
-                updateLocation() // 실시간 위치 업데이트
+                    updateLocation() // 실시간 위치 업데이트
 
-                println("주소 : " + areafather + areaname)
-                apiconnect.requestdoitData(areafather,areaname).enqueue(object : Callback<Doitclass> {
-                    override fun onFailure(call: Call<Doitclass>, t: Throwable) {
-                        t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
-                        // 웹 통신에 실패 했을 때 실행되는 코드
-                        val dialog = AlertDialog.Builder(this@Question_Activity)
-                        dialog.setTitle("실패")
-                        dialog.setMessage("통신에 실패했습니다.")
-                        dialog.show()
-                    }
+                    println("주소 : " + areafather + areaname)
+                    apiconnect.requestdoitData(areafather,areaname).enqueue(object : Callback<Doitclass> {
+                        override fun onFailure(call: Call<Doitclass>, t: Throwable) {
+                            t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
+                            // 웹 통신에 실패 했을 때 실행되는 코드
+                            val dialog = AlertDialog.Builder(this@Question_Activity)
+                            dialog.setTitle("실패")
+                            dialog.setMessage("통신에 실패했습니다.")
+                            dialog.show()
+                            show_flag = true
+                        }
 
-                    override fun onResponse(call: Call<Doitclass>, response: Response<Doitclass>) {
-                        //웹 통신에 성공 했을 때 실행되는 코드
-                        val doitdata = response.body()
-                        val dialog = AlertDialog.Builder(this@Question_Activity)
-                        dialog.setTitle("뚱이의 답변")
-                        dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n 주소는 " + doitdata?.address + " 여기야!" )
-                        dialog.show()
-                    }
-                })
-            } else {
+                        override fun onResponse(call: Call<Doitclass>, response: Response<Doitclass>) {
+                            //웹 통신에 성공 했을 때 실행되는 코드
+                            val doitdata = response.body()
+                            val dialog = AlertDialog.Builder(this@Question_Activity)
+                            dialog.setTitle("뚱이의 답변")
+                            dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n 주소는 " + doitdata?.address + " 여기야!" )
+                            dialog.show()
+                            show_flag = true
+                        }
+                    })
+                } else {
 
-                //위치 권한 없으면 받아오기
-                getLocation()
+                    //위치 권한 없으면 받아오기
+                    getLocation()
+                }
             }
         }
 
         //show_btn 클릭시 이벤트
         enjoy_btn.setOnClickListener {
-            //위치 권한 체크
-            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-                //서비스 실행
+            if(enjoy_flag) {
+                //위치 권한 체크
+                if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    enjoy_flag = false
+                    //서비스 실행
 
-                updateLocation() // 실시간 위치 업데이트
+                    updateLocation() // 실시간 위치 업데이트
 
-                println("주소 : " + areafather + areaname)
-                apiconnect.requestenjoyData(areafather,areaname).enqueue(object : Callback<Enjoyclass> {
-                    override fun onFailure(call: Call<Enjoyclass>, t: Throwable) {
-                        t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
-                        // 웹 통신에 실패 했을 때 실행되는 코드
-                        val dialog = AlertDialog.Builder(this@Question_Activity)
-                        dialog.setTitle("실패")
-                        dialog.setMessage("통신에 실패했습니다.")
-                        dialog.show()
-                    }
+                    println("주소 : " + areafather + areaname)
+                    apiconnect.requestenjoyData(areafather,areaname).enqueue(object : Callback<Enjoyclass> {
+                        override fun onFailure(call: Call<Enjoyclass>, t: Throwable) {
+                            t.message?.let { it1 -> Log.d("DEBUG", it1) } // 에러메시지 출력(오류나서 무슨 오류인지 확인하려고했었음)
+                            // 웹 통신에 실패 했을 때 실행되는 코드
+                            val dialog = AlertDialog.Builder(this@Question_Activity)
+                            dialog.setTitle("실패")
+                            dialog.setMessage("통신에 실패했습니다.")
+                            dialog.show()
+                            enjoy_flag = true
+                        }
 
-                    override fun onResponse(call: Call<Enjoyclass>, response: Response<Enjoyclass>) {
-                        //웹 통신에 성공 했을 때 실행되는 코드
-                        val doitdata = response.body()
-                        val dialog = AlertDialog.Builder(this@Question_Activity)
-                        dialog.setTitle("뚱이의 답변")
-                        dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n 주소는 " + doitdata?.address + " 여기야!" )
-                        dialog.show()
-                    }
-                })
-            } else {
+                        override fun onResponse(call: Call<Enjoyclass>, response: Response<Enjoyclass>) {
+                            //웹 통신에 성공 했을 때 실행되는 코드
+                            val doitdata = response.body()
+                            val dialog = AlertDialog.Builder(this@Question_Activity)
+                            dialog.setTitle("뚱이의 답변")
+                            dialog.setMessage(doitdata?.title + "에 가보는건 어때?\n 주소는 " + doitdata?.address + " 여기야!" )
+                            dialog.show()
+                            enjoy_flag = true
+                        }
+                    })
 
-                //위치 권한 없으면 받아오기
-                getLocation()
+
+                } else {
+
+                    //위치 권한 없으면 받아오기
+                    getLocation()
+                }
             }
         }
     }
