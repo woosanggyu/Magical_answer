@@ -33,10 +33,12 @@ class Memo_Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memo_)
 
+        // MainActivity로부터 아이디, 토큰, 닉네임 값 넘겨 받기
         id = intent.getStringExtra("id").toString()
         usertoken = intent.getStringExtra("usertoken").toString()
         nickname = intent.getStringExtra("nickname").toString()
 
+        // 메모 리스트 불러오기
         apiconnect.requestmymemo(usertoken, nickname).enqueue(object : Callback<Mymemolist> {
             override fun onFailure(call: Call<Mymemolist>, t: Throwable) {
                 // 웹 통신에 실패 했을 때 실행되는 코드
@@ -67,12 +69,12 @@ class Memo_Activity : AppCompatActivity() {
                     var dt = datess.getString("CreateTime")
 
                     my_memo.add(mymemo(no,wr,ti,con,dt))
-
-                    val adapter = MemoAdapter(my_memo)
-
-                    recyclerView.adapter = adapter
-
                 }
+
+                // 어댑터랑 my_memo 리스트랑 연결
+                val adapter = MemoAdapter(my_memo)
+                // RecyclerView에 매칭시키기
+                recyclerView.adapter = adapter
             }
         })
 
@@ -82,18 +84,21 @@ class Memo_Activity : AppCompatActivity() {
     }
 
     fun create_item() {
-
+        // 서비스 연결 및 dialog 내부 연결
         var inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.memo_create, null)
 
+        // Dialog 객체 생성
         var alertDialog = AlertDialog.Builder(this)
             .create()
 
+        // 버튼 정의
         val create = view.findViewById<Button>(R.id.create_btn)
         val cancel = view.findViewById<Button>(R.id.create_cancel_btn)
 
 
         create.setOnClickListener {
+            // 사용자가 입력한 제목, 내용 가져오기
             var title = alertDialog.item_titles?.text.toString()
             var content = alertDialog.item_content?.text.toString()
 
@@ -108,11 +113,13 @@ class Memo_Activity : AppCompatActivity() {
 
                         Toast.makeText(applicationContext, result?.answer, Toast.LENGTH_SHORT).show()
 
+                        // 정상적으로 메모작성이 완료되면 유저 토큰, 아이디, 닉네임을 실어서 인텐트
                         val intent = Intent(this@Memo_Activity, Memo_Activity::class.java)
                         intent.putExtra("usertoken",usertoken)
                         intent.putExtra("id", id)
                         intent.putExtra("nickname", nickname)
 
+                        //다이얼로그 닫기
                         alertDialog.dismiss()
 
                         startActivity(intent)
@@ -128,6 +135,7 @@ class Memo_Activity : AppCompatActivity() {
 
 
         cancel.setOnClickListener {
+            // 다이얼 로그 닫기
             alertDialog.dismiss()
         }
 

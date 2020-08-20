@@ -101,19 +101,22 @@ class Login_Activity : AppCompatActivity() {
         var signup_id_flag = false
         var signup_nickname_flag = false
 
+        // 서비스 연결 및 dialog 내부 연결
         var inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.activity_signup__dialog, null)
 
+        // dialog 생성
         var alertDialog = AlertDialog.Builder(this)
             .create()
 
+        // 버튼들 정의
         val register = view.findViewById<Button>(R.id.register_btn)
         val cancel = view.findViewById<Button>(R.id.cancel_btn)
         val checkid = view.findViewById<Button>(R.id.check_id_btn)
         val checknick = view.findViewById<Button>(R.id.check_nickname_btn)
 
         checkid.setOnClickListener {
-
+            //사용자가 입력한 아이디 값 가져오기
             var id = alertDialog.userid.text.toString()
             if( id != "" ) {
 
@@ -139,6 +142,7 @@ class Login_Activity : AppCompatActivity() {
         }
 
         checknick.setOnClickListener {
+            // 사용자가 입력한 닉네임 가져오기
             var nickname = alertDialog.usernick_text.text.toString()
             if( nickname != "" ) {
 
@@ -164,6 +168,7 @@ class Login_Activity : AppCompatActivity() {
         }
 
         register.setOnClickListener {
+            // 사용자가 입력한 값들 전부 가져오기
             var id = alertDialog.userid.text.toString()
             var pw = alertDialog.userpw_text?.text.toString()
             var nick = alertDialog.usernick_text?.text.toString()
@@ -204,11 +209,12 @@ class Login_Activity : AppCompatActivity() {
         }
 
         cancel.setOnClickListener {
+            // 취소 버튼 클릭 시 다이얼로그 닫기
             alertDialog.dismiss()
         }
 
         alertDialog.setView(view)
         alertDialog.show()
-        alertDialog.window?.setLayout(700,850)
+        alertDialog.window?.setLayout(700,850) // 다이얼로그 사이즈 설정
         }
     }

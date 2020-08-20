@@ -249,11 +249,11 @@ class Question_Activity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     fun updateLocation() {
         var locationRequest = LocationRequest()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 10000
-        locationRequest.fastestInterval = 5000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY // 가장 정확한 위치를 요청
+        locationRequest.interval = 10000 // 요청 간격
+        locationRequest.fastestInterval = 5000 // 밀리초 단위 중 가장 빠른 위치 요청 ( 정확함 )
 
-        mFusedLocationProviderClient = FusedLocationProviderClient(this)
+        mFusedLocationProviderClient = FusedLocationProviderClient(this) // 위치 값 획득 클래스
         mFusedLocationProviderClient.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper())
     }
 
@@ -267,12 +267,17 @@ class Question_Activity : AppCompatActivity() {
     }
 
     fun updateAddressUI(location : Location){
+        // 받아온 위치 값을 이용해 주소 값으로 변환 하는 작업
         var geocoder : Geocoder
         var addressList: ArrayList<Address>
 
         geocoder = Geocoder(this, Locale.getDefault())
 
-        addressList = geocoder.getFromLocation(location.latitude, location.longitude, 1) as ArrayList<Address>
+        addressList = geocoder.getFromLocation(
+            location.latitude,
+            location.longitude,
+            1
+        ) as ArrayList<Address>
 
 //        println("주소 :" + addressList)
 

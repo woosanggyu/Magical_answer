@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // 이전 액티비티로 부터 넘겨받은 토큰이 있는지 확인
         if(intent.hasExtra("token")) {
             token = true
         } else {
@@ -21,8 +22,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         if(token) {
+            // 토큰이 있다면 로그아웃으로 텍스트 설정
             Login_btn.setText("Logout")
         } else {
+            // 토큰이 없다면 로그인으로 텍스트 설정
             Login_btn.setText("Login")
         }
 
@@ -44,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 //                println("유저 닉넴이다 : " + Nickname)
 
                 val intent = Intent(this@MainActivity, Memo_Activity::class.java)
+                // 로그인한 유저의 토큰, 아이디, 닉네임 값 실어 보내기
                 intent.putExtra("usertoken",usertoken)
                 intent.putExtra("id", id)
                 intent.putExtra("nickname", nickname)
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         Login_btn.setOnClickListener {
             if(token == true) {
-                //토큰이 있으므로 로그인 상태이므로 로그아웃 시키기
+                //토큰이 있다면 로그아웃 시키기
                 token = false
                 Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
 
