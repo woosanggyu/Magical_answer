@@ -7,13 +7,25 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.magical_answer.R
 
-class MemoAdapter( val mymemoList : ArrayList<mymemo>) : RecyclerView.Adapter<MemoAdapter.ViewHolder>() {
+class MemoAdapter( val mymemoList : ArrayList<mymemo>, var clickListener: ItemClickListener) : RecyclerView.Adapter<MemoAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         // 아이템 정의
         val no = itemView.findViewById<TextView>(R.id.item_no)
         val title = itemView.findViewById<TextView>(R.id.item_title)
         val CreateTime = itemView.findViewById<TextView>(R.id.item_date)
+
+        fun init(item: mymemo, action: ItemClickListener) {
+
+            //초기화
+            no.text = item.no
+            title.text = item.title
+            CreateTime.text = item.CreateTime
+
+            itemView.setOnClickListener {
+                action.onClick(item, adapterPosition)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,12 +40,19 @@ class MemoAdapter( val mymemoList : ArrayList<mymemo>) : RecyclerView.Adapter<Me
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //바인딩 하는부분 = 아이템 매칭
-        val memos : mymemo = mymemoList[position]
 
-        holder?.no?.text = memos.no
-        holder?.title?.text = memos.title
-        holder?.CreateTime?.text = memos.CreateTime
+        holder.init(mymemoList.get(position), clickListener)
 
+        //바인딩 하는부분 = 아이템 매칭 => 위의 초기화 함수로 대체
+//        val memos : mymemo = mymemoList[position]
+
+//        holder?.no?.text = memos.no
+//        holder?.title?.text = memos.title
+//        holder?.CreateTime?.text = memos.CreateTime
+
+        }
     }
-}
+
+    interface ItemClickListener {
+        fun onClick(view: mymemo, position: Int)
+    }
