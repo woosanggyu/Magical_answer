@@ -13,6 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Memoinfo_Activity"></activity>
+        <activity android:name=".MemocheckActivity" />
         <activity android:name=".Login_Activity" />
         <activity android:name=".Memo_Activity" />
         <activity android:name=".Question_Activity" />

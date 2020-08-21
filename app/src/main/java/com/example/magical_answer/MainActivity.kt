@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
             if(token){
                 //토큰, 아이디, 닉네임
                 val usertoken = intent.getStringExtra("token")
-                val id = intent.getStringExtra("id")
                 val nickname = intent.getStringExtra("nickname")
 
 //                println("유저 토큰이다 : " + usertoken)
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, Memo_Activity::class.java)
                 // 로그인한 유저의 토큰, 아이디, 닉네임 값 실어 보내기
                 intent.putExtra("usertoken",usertoken)
-                intent.putExtra("id", id)
                 intent.putExtra("nickname", nickname)
                 startActivity(intent)
             } else {

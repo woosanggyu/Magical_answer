@@ -11,14 +11,12 @@ class MemoAdapter( val mymemoList : ArrayList<mymemo>, var clickListener: ItemCl
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         // 아이템 정의
-        val no = itemView.findViewById<TextView>(R.id.item_no)
         val title = itemView.findViewById<TextView>(R.id.item_title)
         val CreateTime = itemView.findViewById<TextView>(R.id.item_date)
 
         fun init(item: mymemo, action: ItemClickListener) {
 
             //초기화
-            no.text = item.no
             title.text = item.title
             CreateTime.text = item.CreateTime
 

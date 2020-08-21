@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Memoinfo_Activity">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <ImageView
+            android:id="@+id/cancel_memo_btn"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/backspace2" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/memotext"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/add_memo_btn"
+            android:layout_marginRight="20dp"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/check"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10">
+
+        <EditText
+            android:id="@+id/item_title_text"
+            android:background="@drawable/memo_edittext_custom"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:hint="제목을 입력해 주세요."
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:fontFamily="@font/maplebold"
+            />
+
+        <EditText
+            android:id="@+id/item_content_text"
+            android:inputType="text"
+            android:background="@drawable/memo_edittext_custom"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:hint="메모를 입력해 주세요."
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/maplebold"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

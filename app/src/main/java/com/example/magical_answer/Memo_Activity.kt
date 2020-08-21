@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.magical_answer.`interface`.*
 import kotlinx.android.synthetic.main.activity_memo_.*
-import kotlinx.android.synthetic.main.memo_create.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,14 +25,12 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
 
     var usertoken = ""
     var nickname = ""
-    var id = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memo_)
 
         // MainActivity로부터 아이디, 토큰, 닉네임 값 넘겨 받기
-        id = intent.getStringExtra("id").toString()
         usertoken = intent.getStringExtra("usertoken").toString()
         nickname = intent.getStringExtra("nickname").toString()
 
@@ -86,73 +83,15 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
         })
 
         add_item.setOnClickListener {
-            create_item()
+            val intent = Intent(this@Memo_Activity, Memoinfo_Activity::class.java)
+            intent.putExtra("usertoken",usertoken)
+            intent.putExtra("nickname", nickname)
+            startActivity(intent)
         }
     }
 
     override fun onClick(view: mymemo, position: Int) {
-        Toast.makeText(this, view.title, Toast.LENGTH_SHORT).show()
-    }
-
-    fun create_item() {
-        // 서비스 연결 및 dialog 내부 연결
-        var inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.memo_create, null)
-
-        // Dialog 객체 생성
-        var alertDialog = AlertDialog.Builder(this)
-            .create()
-
-        // 버튼 정의
-        val create = view.findViewById<Button>(R.id.create_btn)
-        val cancel = view.findViewById<Button>(R.id.create_cancel_btn)
-
-
-        create.setOnClickListener {
-            // 사용자가 입력한 제목, 내용 가져오기
-            var title = alertDialog.item_titles?.text.toString()
-            var content = alertDialog.item_content?.text.toString()
-
-            if ( title != "" && content != "") {
-                apiconnect.requestaddmemo(usertoken, nickname,title,content).enqueue(object : Callback<addmemo>{
-                    override fun onFailure(call: Call<addmemo>, t: Throwable) {
-                        Toast.makeText(applicationContext, "서버 통신 오류", Toast.LENGTH_SHORT).show()
-                    }
-
-                    override fun onResponse(call: Call<addmemo>, response: Response<addmemo>) {
-                        val result = response.body()
-
-                        Toast.makeText(applicationContext, result?.answer, Toast.LENGTH_SHORT).show()
-
-                        // 정상적으로 메모작성이 완료되면 유저 토큰, 아이디, 닉네임을 실어서 인텐트
-                        val intent = Intent(this@Memo_Activity, Memo_Activity::class.java)
-                        intent.putExtra("usertoken",usertoken)
-                        intent.putExtra("id", id)
-                        intent.putExtra("nickname", nickname)
-
-                        //다이얼로그 닫기
-                        alertDialog.dismiss()
-
-                        startActivity(intent)
-                    }
-                })
-            } else if (title == "") {
-                Toast.makeText(applicationContext, "제목을 입력해주세요.", Toast.LENGTH_SHORT).show()
-            } else if (content == "") {
-                Toast.makeText(applicationContext, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-
-
-        cancel.setOnClickListener {
-            // 다이얼 로그 닫기
-            alertDialog.dismiss()
-        }
-
-
-        alertDialog.setView(view)
-        alertDialog.show()
+//        Toast.makeText(this, view.title, Toast.LENGTH_SHORT).show()
 
     }
 

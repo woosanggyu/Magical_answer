@@ -25,6 +25,7 @@
         android:layout_height="300dp">
 
         <Button
+            android:fontFamily="@font/maplebold"
             android:text="Ask for Patrick Star"
             android:id="@+id/ask_patrick_btn"
             android:layout_marginTop="20dp"
@@ -35,6 +36,7 @@
             android:layout_height="70dp"/>
 
         <Button
+            android:fontFamily="@font/maplebold"
             android:text="MEMO"
             android:id="@+id/memo_btn"
             android:layout_marginTop="30dp"
@@ -46,6 +48,7 @@
 
         <Button
             android:text="Login"
+            android:fontFamily="@font/maplebold"
             android:id="@+id/Login_btn"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"

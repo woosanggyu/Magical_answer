@@ -59,7 +59,6 @@ class Login_Activity : AppCompatActivity() {
                             Toast.makeText(this@Login_Activity,"로그인에 성공했습니다.",Toast.LENGTH_SHORT).show()
                             val loginintent = Intent(this@Login_Activity, MainActivity::class.java)
                             loginintent.putExtra("token", usertoken)
-                            loginintent.putExtra("id", ID)
                             loginintent.putExtra("nickname", Nickname)
                             startActivity(loginintent)
 
