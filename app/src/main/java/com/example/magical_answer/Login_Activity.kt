@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.magical_answer.`interface`.*
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login_.*
 import kotlinx.android.synthetic.main.activity_question_.*
 import kotlinx.android.synthetic.main.activity_signup__dialog.*
@@ -215,5 +216,5 @@ class Login_Activity : AppCompatActivity() {
         alertDialog.setView(view)
         alertDialog.show()
         alertDialog.window?.setLayout(700,850) // 다이얼로그 사이즈 설정
-        }
     }
+}

@@ -10,6 +10,8 @@ class MainActivity : AppCompatActivity() {
 
     var token = false
 
+    var Backwait : Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,6 +75,16 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, Login_Activity::class.java)
                 startActivity(intent)
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        if(System.currentTimeMillis() - Backwait >= 2000) {
+            Backwait = System.currentTimeMillis()
+            Toast.makeText(this@MainActivity,"뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+        } else {
+            //액티비티 종료
+            finish()
         }
     }
 }

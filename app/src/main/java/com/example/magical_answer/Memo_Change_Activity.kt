@@ -21,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Memo_Change_Activity : AppCompatActivity() {
 
+    var Backwait : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,4 +82,14 @@ class Memo_Change_Activity : AppCompatActivity() {
         .build()
 
     val apiconnect = retrofit.create(ApiService::class.java)
+
+    override fun onBackPressed() {
+        if(System.currentTimeMillis() - Backwait >= 2000) {
+            Backwait = System.currentTimeMillis()
+            Toast.makeText(this@Memo_Change_Activity,"뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+        } else {
+            //액티비티 종료
+            finish()
+        }
+    }
 }

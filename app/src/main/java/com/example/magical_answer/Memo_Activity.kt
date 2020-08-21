@@ -99,6 +99,7 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
         startActivity(intent)
     }
 
+
     val retrofit = Retrofit.Builder()
         .baseUrl("http://ec2-54-180-91-26.ap-northeast-2.compute.amazonaws.com:8080") //서버주소
         .addConverterFactory(GsonConverterFactory.create())
