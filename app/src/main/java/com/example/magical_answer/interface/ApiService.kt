@@ -77,4 +77,22 @@ interface ApiService {
         @Field("title") title: String,
         @Field("content") content: String
     ) : Call<addmemo>
+
+    @FormUrlEncoded
+    @POST("/api/requestdata/memoview")
+    fun requestmemoview(
+        @Header("token") token : String,
+        @Field("nickname") nickname: String,
+        @Field("no") no: String
+    ) : Call<memoview>
+
+    @FormUrlEncoded
+    @PUT("/api/requestdata/updatememo")
+    fun requestupdatememo(
+        @Header("token") token : String,
+        @Field("nickname") nickname: String,
+        @Field("no") no: String,
+        @Field("title") title: String,
+        @Field("content") content: String
+    ) : Call<updatememo>
 }

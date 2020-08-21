@@ -59,3 +59,13 @@ data class mymemo(
 data class addmemo(
     val answer : String
 )
+
+data class memoview(
+    val title : String,
+    val con : String
+)
+
+data class updatememo(
+    val answer: String
+)
+

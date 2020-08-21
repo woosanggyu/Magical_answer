@@ -6,50 +6,61 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.magical_answer.`interface`.ApiService
 import com.example.magical_answer.`interface`.addmemo
+import com.example.magical_answer.`interface`.memoview
+import com.example.magical_answer.`interface`.updatememo
+import kotlinx.android.synthetic.main.activity_memo__change_.*
 import kotlinx.android.synthetic.main.activity_memoinfo_.*
+import kotlinx.android.synthetic.main.activity_memoinfo_.cancel_memo_btn
+import kotlinx.android.synthetic.main.activity_memoinfo_.item_content_text
+import kotlinx.android.synthetic.main.activity_memoinfo_.item_title_text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Memoinfo_Activity : AppCompatActivity() {
+class Memo_Change_Activity : AppCompatActivity() {
 
-    var usertoken = ""
-    var nickname = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_memoinfo_)
+        setContentView(R.layout.activity_memo__change_)
 
         // MemoActivity로부터 값 넘겨 받기
-        usertoken = intent.getStringExtra("usertoken").toString()
-        nickname = intent.getStringExtra("nickname").toString()
+        var usertoken = intent.getStringExtra("usertoken").toString()
+        var nickname = intent.getStringExtra("nickname").toString()
+        var no = intent.getStringExtra("no").toString()
+        var title = intent.getStringExtra("title").toString()
+        var content = intent.getStringExtra("content").toString()
+
+        item_title_text.setText(title)
+        item_content_text.setText(content)
 
         cancel_memo_btn.setOnClickListener {
-            val intent = Intent(this@Memoinfo_Activity, Memo_Activity::class.java)
+            val intent = Intent(this@Memo_Change_Activity, Memo_Activity::class.java)
             intent.putExtra("usertoken",usertoken)
             intent.putExtra("nickname", nickname)
             startActivity(intent)
         }
 
-        add_memo_btn.setOnClickListener {
+        change_memo_btn.setOnClickListener {
             val title = item_title_text.text.toString()
             val content = item_content_text.text.toString()
 
             if ( title != "" && content != "") {
-                apiconnect.requestaddmemo(usertoken, nickname,title,content).enqueue(object : Callback<addmemo> {
-                    override fun onFailure(call: Call<addmemo>, t: Throwable) {
+                apiconnect.requestupdatememo(usertoken, nickname, no, title, content).enqueue(object :
+                    Callback<updatememo> {
+                    override fun onFailure(call: Call<updatememo>, t: Throwable) {
                         Toast.makeText(applicationContext, "서버 통신 오류", Toast.LENGTH_SHORT).show()
                     }
 
-                    override fun onResponse(call: Call<addmemo>, response: Response<addmemo>) {
+                    override fun onResponse(call: Call<updatememo>, response: Response<updatememo>) {
                         val result = response.body()
 
                         Toast.makeText(applicationContext, result?.answer, Toast.LENGTH_SHORT).show()
 
-                        // 정상적으로 메모작성이 완료되면 유저 토큰, 닉네임을 실어서 인텐트
-                        val intent = Intent(this@Memoinfo_Activity, Memo_Activity::class.java)
+                        // 정상적으로 메모가 수정되면 유저 토큰, 닉네임을 실어서 인텐트
+                        val intent = Intent(this@Memo_Change_Activity, Memo_Activity::class.java)
                         intent.putExtra("usertoken",usertoken)
                         intent.putExtra("nickname", nickname)
 

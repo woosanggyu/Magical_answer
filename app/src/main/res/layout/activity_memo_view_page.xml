@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Memoinfo_Activity">
+    tools:context=".Memo_viewPage">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -29,11 +29,11 @@
             android:layout_weight="1"/>
 
         <ImageView
-            android:id="@+id/add_memo_btn"
+            android:id="@+id/change_memo_btn"
             android:layout_marginRight="20dp"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:src="@drawable/check"/>
+            android:src="@drawable/update_image"/>
 
     </LinearLayout>
 
@@ -44,30 +44,28 @@
         android:layout_height="0dp"
         android:layout_weight="10">
 
-        <EditText
+        <TextView
             android:padding="10dp"
-            android:id="@+id/item_title_text"
+            android:id="@+id/item_title_texts"
             android:background="@drawable/memo_edittext_custom"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:textSize="20sp"
-            android:maxLines="1"
+            android:text="넘겨 받은 제목"
             android:inputType="textMultiLine"
-            android:hint="제목을 입력해 주세요."
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:fontFamily="@font/maplebold"
             />
 
-        <EditText
+        <TextView
             android:padding="10dp"
-            android:gravity="top"
-            android:id="@+id/item_content_text"
-            android:inputType="textMultiLine"
+            android:id="@+id/item_content_texts"
             android:background="@drawable/memo_edittext_custom"
             android:layout_marginTop="20dp"
             android:textSize="18sp"
-            android:hint="메모를 입력해 주세요."
+            android:inputType="textMultiLine"
+            android:text="넘겨 받은 내용"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="50dp"
@@ -76,8 +74,5 @@
             android:fontFamily="@font/maplebold"
             />
 
-
     </LinearLayout>
-
-
 </LinearLayout>

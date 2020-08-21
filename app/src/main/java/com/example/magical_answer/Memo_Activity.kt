@@ -92,7 +92,11 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
 
     override fun onClick(view: mymemo, position: Int) {
 //        Toast.makeText(this, view.title, Toast.LENGTH_SHORT).show()
-
+        val intent = Intent(this@Memo_Activity, Memo_viewPage::class.java)
+        intent.putExtra("usertoken",usertoken)
+        intent.putExtra("nickname", nickname)
+        intent.putExtra("no", view.no)
+        startActivity(intent)
     }
 
     val retrofit = Retrofit.Builder()
