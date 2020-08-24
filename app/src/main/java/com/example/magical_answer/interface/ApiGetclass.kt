@@ -69,3 +69,7 @@ data class updatememo(
     val answer: String
 )
 
+data class memodelete(
+    val answer: String
+)
+

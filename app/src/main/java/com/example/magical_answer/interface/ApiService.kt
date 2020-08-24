@@ -95,4 +95,12 @@ interface ApiService {
         @Field("title") title: String,
         @Field("content") content: String
     ) : Call<updatememo>
+
+    @FormUrlEncoded
+    @DELETE("/api/requestdata/delmemo")
+    fun requestdeletememo(
+        @Header("token") token : String,
+        @Field("nickname") nickname: String,
+        @Field("no") no: String
+    ) : Call<memodelete>
 }

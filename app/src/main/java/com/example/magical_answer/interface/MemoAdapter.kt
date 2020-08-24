@@ -1,5 +1,6 @@
 package com.example.magical_answer.`interface`
 
+import android.system.Os.remove
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,3 +55,4 @@ class MemoAdapter( val mymemoList : ArrayList<mymemo>, var clickListener: ItemCl
     interface ItemClickListener {
         fun onClick(view: mymemo, position: Int)
     }
+

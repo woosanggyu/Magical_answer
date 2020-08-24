@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.magical_answer.`interface`.*
 import kotlinx.android.synthetic.main.activity_memo_.*
+import kotlinx.android.synthetic.main.memo_custom.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -88,10 +89,14 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
             intent.putExtra("nickname", nickname)
             startActivity(intent)
         }
+
+//        memo_delete_btn.setOnClickListener {
+//            println()
+//        }
     }
 
     override fun onClick(view: mymemo, position: Int) {
-//        Toast.makeText(this, view.title, Toast.LENGTH_SHORT).show()
+        println("글 번호 :" + view.no)
         val intent = Intent(this@Memo_Activity, Memo_viewPage::class.java)
         intent.putExtra("usertoken",usertoken)
         intent.putExtra("nickname", nickname)
