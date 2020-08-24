@@ -1,20 +1,15 @@
 package com.example.magical_answer
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.magical_answer.`interface`.*
 import kotlinx.android.synthetic.main.activity_memo_.*
-import kotlinx.android.synthetic.main.memo_custom.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback

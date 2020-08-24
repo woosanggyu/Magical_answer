@@ -1,9 +1,9 @@
 package com.example.magical_answer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.magical_answer.`interface`.ApiService
 import com.example.magical_answer.`interface`.addmemo
 import kotlinx.android.synthetic.main.activity_memoinfo_.*
@@ -78,7 +78,9 @@ class Memoinfo_Activity : AppCompatActivity() {
             Toast.makeText(this@Memoinfo_Activity,"뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
         } else {
             //액티비티 종료
+            moveTaskToBack(true)
             finish()
+            android.os.Process.killProcess(android.os.Process.myPid())
         }
     }
 }

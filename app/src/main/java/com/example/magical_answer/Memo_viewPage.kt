@@ -1,16 +1,13 @@
 package com.example.magical_answer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.magical_answer.`interface`.ApiService
 import com.example.magical_answer.`interface`.memoview
 import kotlinx.android.synthetic.main.activity_memo_view_page.*
-import kotlinx.android.synthetic.main.activity_memoinfo_.*
 import kotlinx.android.synthetic.main.activity_memoinfo_.cancel_memo_btn
-import kotlinx.android.synthetic.main.activity_memoinfo_.item_content_text
-import kotlinx.android.synthetic.main.activity_memoinfo_.item_title_text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
