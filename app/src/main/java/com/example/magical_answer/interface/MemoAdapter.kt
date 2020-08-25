@@ -50,9 +50,12 @@ class MemoAdapter( val mymemoList : ArrayList<mymemo>, var clickListener: ItemCl
 //        holder?.CreateTime?.text = memos.CreateTime
 
         }
+
     }
 
     interface ItemClickListener {
         fun onClick(view: mymemo, position: Int)
     }
+
+
 

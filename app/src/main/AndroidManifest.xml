@@ -16,7 +16,6 @@
         <activity android:name=".Memo_viewPage"></activity>
         <activity android:name=".Memo_Change_Activity" />
         <activity android:name=".Memoinfo_Activity" />
-        <activity android:name=".MemocheckActivity" />
         <activity android:name=".Login_Activity" />
         <activity android:name=".Memo_Activity" />
         <activity android:name=".Question_Activity" />

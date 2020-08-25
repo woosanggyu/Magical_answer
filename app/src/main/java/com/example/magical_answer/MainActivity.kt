@@ -9,13 +9,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var token = false
-
     var Backwait : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var token = false
 
         // 이전 액티비티로 부터 넘겨받은 토큰이 있는지 확인
         if(intent.hasExtra("token")) {

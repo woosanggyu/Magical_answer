@@ -1,5 +1,6 @@
 package com.example.magical_answer.`interface`
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
@@ -97,7 +98,7 @@ interface ApiService {
     ) : Call<updatememo>
 
     @FormUrlEncoded
-    @DELETE("/api/requestdata/delmemo")
+    @HTTP(method="DELETE", hasBody=true, path="/api/requestdata/delmemo")
     fun requestdeletememo(
         @Header("token") token : String,
         @Field("nickname") nickname: String,
