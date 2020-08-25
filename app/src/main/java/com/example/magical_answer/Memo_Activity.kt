@@ -20,6 +20,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Memo_Activity : AppCompatActivity(), ItemClickListener {
 
@@ -67,20 +72,19 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
                     var con = datess.getString("content")
                     var dt = datess.getString("CreateTime")
 
-                    my_memo.add(mymemo(no,wr,ti,con,dt))
+                    // 가져온 시간이 UTC 기준이라서 9시간을 더해줌
+                    val dts_ld = LocalDateTime.parse(dt, DateTimeFormatter.ISO_DATE_TIME).plusHours(9)
+
+                    // 다시 스트링 형식으로 변환
+                    val dts_st = dts_ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+
+                    my_memo.add(mymemo(no,wr,ti,con,dts_st))
                 }
 
                 // 어댑터랑 my_memo 리스트랑 연결
                 val adapter = MemoAdapter(my_memo, this@Memo_Activity)
                 // RecyclerView에 매칭시키기
                 recyclerView.adapter = adapter
-
-//                adapter.setItemClickListener( object: MemoAdapter.ItemClickListener{
-//                    override fun onClick(view: mymemo, position: Int) {
-//                        println("제목 :" + view.item_title)
-//                        Toast.makeText(this@Memo_Activity, "${position}번 클릭", Toast.LENGTH_SHORT).show()
-//                    }
-//                })
             }
         })
 
@@ -175,16 +179,6 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
         intent.putExtra("token",usertoken)
         intent.putExtra("nickname", nickname)
         startActivity(intent)
-
-//        if(System.currentTimeMillis() - Backwait >= 2000) {
-//            Backwait = System.currentTimeMillis()
-//            Toast.makeText(this@Memo_Activity,"뒤로가기 버튼을 한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
-//        } else {
-//            //액티비티 종료
-//            ActivityCompat.finishAffinity(this)
-//            System.runFinalizersOnExit(true)
-//            System.exit(0)
-//        }
     }
 }
 
