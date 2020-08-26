@@ -33,8 +33,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         ask_patrick_btn.setOnClickListener {
-            val intent = Intent(this@MainActivity, Question_Activity::class.java)
-            startActivity(intent)
+            if(token) {
+                val usertoken = intent.getStringExtra("token")
+                val nickname = intent.getStringExtra("nickname")
+
+                val intent = Intent(this@MainActivity, Question_Activity::class.java)
+                intent.putExtra("usertoken", usertoken)
+                intent.putExtra("nickname", nickname)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this@MainActivity, Question_Activity::class.java)
+                startActivity(intent)
+            }
         }
 
         memo_btn.setOnClickListener {

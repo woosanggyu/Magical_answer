@@ -31,8 +31,6 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
     var usertoken = ""
     var nickname = ""
 
-    var Backwait : Long = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memo_)
@@ -95,10 +93,6 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
             startActivity(intent)
         }
 
-//        memo_delete_btn.setOnClickListener {
-//            println()
-//        }
-
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback( 0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -114,9 +108,6 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
                 val lenint = Integer.parseInt(lenstring)
                 val deleteno = my_memo[lenint].no
 //                println("Int : " + my_memo[lenint].no)
-
-
-
 
                 // 삭제하기
                 apiconnect.requestdeletememo(usertoken, nickname, deleteno).enqueue( object : Callback<memodelete>{
@@ -181,4 +172,3 @@ class Memo_Activity : AppCompatActivity(), ItemClickListener {
         startActivity(intent)
     }
 }
-
