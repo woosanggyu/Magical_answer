@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="240dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:gravity="center"
@@ -22,69 +22,99 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
-
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <TextView
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="right"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:fontFamily="@font/maplelight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="이름: "/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
 
-            <TextView
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="right"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:fontFamily="@font/maplelight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="주소: "/>
+                <TextView
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/maplelight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이름: "/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/maplelight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="주소: "/>
+            </LinearLayout>
+
+
+
+
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
 
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:id="@+id/name"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="left"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:fontFamily="@font/maplelight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 이름이당"/>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:id="@+id/address"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="left"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:fontFamily="@font/maplelight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="장소 주소당 "/>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/maplelight"
+                    android:text="이름이당"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/address"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="left"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/maplelight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="장소 주소당 "/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
