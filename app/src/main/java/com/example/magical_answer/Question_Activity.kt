@@ -1,6 +1,7 @@
 package com.example.magical_answer
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -129,7 +130,7 @@ class Question_Activity : AppCompatActivity() {
 
                                 add.setOnClickListener {
                                     if ( named.text.toString() != "" && named.text.toString() != "" && usertoken != "" && nickname != "") {
-                                        apiconnect.requestaddmemo(usertoken, nickname,"먹방 추천 장소","장소 : " + named.text.toString()+ "\n 주소 : " + address.text.toString()).enqueue(object : Callback<addmemo> {
+                                        apiconnect.requestaddmemo(usertoken, nickname,"먹방 추천 장소","장소 : " + named.text.toString()+ "\n주소 : " + address.text.toString()).enqueue(object : Callback<addmemo> {
                                             override fun onFailure(call: Call<addmemo>, t: Throwable) {
                                                 Toast.makeText(applicationContext, "서버 통신 오류", Toast.LENGTH_SHORT).show()
                                             }
@@ -137,16 +138,16 @@ class Question_Activity : AppCompatActivity() {
                                             override fun onResponse(call: Call<addmemo>, response: Response<addmemo>) {
                                                 val result = response.body()
 
-                                                Toast.makeText(applicationContext, result?.answer, Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(applicationContext, "메모에 기록되었습니다.", Toast.LENGTH_SHORT).show()
 
                                                 // 메모가 저장되면 다이얼로그를 닫고 인텐트
                                                 alertDialog.dismiss()
 
-                                                val intent = Intent(this@Question_Activity, Memo_Activity::class.java)
-                                                intent.putExtra("usertoken",usertoken)
-                                                intent.putExtra("nickname", nickname)
-
-                                                startActivity(intent)
+//                                                val intent = Intent(this@Question_Activity, Memo_Activity::class.java)
+//                                                intent.putExtra("usertoken",usertoken)
+//                                                intent.putExtra("nickname", nickname)
+//
+//                                                startActivity(intent)
                                             }
                                         })
                                     } else {
@@ -219,7 +220,7 @@ class Question_Activity : AppCompatActivity() {
 
                             add.setOnClickListener {
                                 if ( named.text.toString() != "" && named.text.toString() != "" && usertoken != "" && nickname != "") {
-                                    apiconnect.requestaddmemo(usertoken, nickname,"구경 추천 장소","장소 : " + named.text.toString()+ "\n 주소 : " + address.text.toString()).enqueue(object : Callback<addmemo> {
+                                    apiconnect.requestaddmemo(usertoken, nickname,"구경 추천 장소","장소 : " + named.text.toString()+ "\n주소 : " + address.text.toString()).enqueue(object : Callback<addmemo> {
                                         override fun onFailure(call: Call<addmemo>, t: Throwable) {
                                             Toast.makeText(applicationContext, "서버 통신 오류", Toast.LENGTH_SHORT).show()
                                         }
@@ -227,16 +228,16 @@ class Question_Activity : AppCompatActivity() {
                                         override fun onResponse(call: Call<addmemo>, response: Response<addmemo>) {
                                             val result = response.body()
 
-                                            Toast.makeText(applicationContext, result?.answer, Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(applicationContext, "메모에 기록되었습니다.", Toast.LENGTH_SHORT).show()
 
                                             // 메모가 저장되면 다이얼로그를 닫고 인텐트
                                             alertDialog.dismiss()
 
-                                            val intent = Intent(this@Question_Activity, Memo_Activity::class.java)
-                                            intent.putExtra("usertoken",usertoken)
-                                            intent.putExtra("nickname", nickname)
-
-                                            startActivity(intent)
+//                                            val intent = Intent(this@Question_Activity, Memo_Activity::class.java)
+//                                            intent.putExtra("usertoken",usertoken)
+//                                            intent.putExtra("nickname", nickname)
+//
+//                                            startActivity(intent)
                                         }
                                     })
                                 } else {
@@ -304,7 +305,7 @@ class Question_Activity : AppCompatActivity() {
 
                             add.setOnClickListener {
                                 if ( named.text.toString() != "" && named.text.toString() != "" && usertoken != "" && nickname != "") {
-                                    apiconnect.requestaddmemo(usertoken, nickname,"체험 추천 장소","장소 : " + named.text.toString()+ "\n 주소 : " + address.text.toString()).enqueue(object : Callback<addmemo> {
+                                    apiconnect.requestaddmemo(usertoken, nickname,"체험 추천 장소","장소 : " + named.text.toString()+ "\n주소 : " + address.text.toString()).enqueue(object : Callback<addmemo> {
                                         override fun onFailure(call: Call<addmemo>, t: Throwable) {
                                             Toast.makeText(applicationContext, "서버 통신 오류", Toast.LENGTH_SHORT).show()
                                         }
@@ -312,16 +313,16 @@ class Question_Activity : AppCompatActivity() {
                                         override fun onResponse(call: Call<addmemo>, response: Response<addmemo>) {
                                             val result = response.body()
 
-                                            Toast.makeText(applicationContext, result?.answer, Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(applicationContext, "메모에 기록되었습니다.", Toast.LENGTH_SHORT).show()
 
                                             // 메모가 저장되면 다이얼로그를 닫고 인텐트
                                             alertDialog.dismiss()
 
-                                            val intent = Intent(this@Question_Activity, Memo_Activity::class.java)
-                                            intent.putExtra("usertoken",usertoken)
-                                            intent.putExtra("nickname", nickname)
-
-                                            startActivity(intent)
+//                                            val intent = Intent(this@Question_Activity, Memo_Activity::class.java)
+//                                            intent.putExtra("usertoken",usertoken)
+//                                            intent.putExtra("nickname", nickname)
+//
+//                                            startActivity(intent)
                                         }
                                     })
                                 } else {
