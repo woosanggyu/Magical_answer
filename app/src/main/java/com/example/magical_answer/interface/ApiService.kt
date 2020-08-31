@@ -53,7 +53,6 @@ interface ApiService {
     ) : Call<checknickclass>
 
     @FormUrlEncoded
-
     @POST("/api/user/signup")
     fun requestregist(
         @Field("id") id:String,
