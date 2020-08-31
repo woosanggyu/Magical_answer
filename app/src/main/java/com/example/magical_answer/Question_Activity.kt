@@ -351,7 +351,7 @@ class Question_Activity : AppCompatActivity() {
 
     //레트로핏 객체 선언
     val retrofit = Retrofit.Builder()
-        .baseUrl("http://ec2-54-180-91-26.ap-northeast-2.compute.amazonaws.com:8080") //서버주소
+        .baseUrl("ec2-3-35-40-128.ap-northeast-2.compute.amazonaws.com:8080") //서버주소
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
