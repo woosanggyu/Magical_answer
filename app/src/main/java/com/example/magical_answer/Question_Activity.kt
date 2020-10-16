@@ -64,7 +64,7 @@ class Question_Activity : AppCompatActivity() {
         //nobase_btn 클릭시 이벤트
         nobase_btn.setOnClickListener {
                 //서비스 실행
-                val no = (1..11).random()
+                val no = (1..22).random()
 
                 apiconnect.requestData(no).enqueue(object : Callback<ApiGetclass> {
                     override fun onFailure(call: Call<ApiGetclass>, t: Throwable) {
